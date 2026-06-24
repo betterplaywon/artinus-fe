@@ -1,0 +1,19 @@
+{
+  "name": "@artinus/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "두 앱이 공유하는 ESLint · TypeScript · Prettier 베이스 설정",
+  "files": [
+    "eslint",
+    "tsconfig",
+    "prettier.config.js"
+  ],
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "typescript-eslint": "^8.62.0"
+  }
+}

@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+**/dist/
+*.tsbuildinfo
+
+# vercel
+.vercel/
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# editor / os
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# env
+.env
+.env.*
+!.env.example
+
+# test / coverage
+coverage/
+
+# claude (로컬/개인 설정 — 공유하지 않음)
+.claude/settings.local.json
