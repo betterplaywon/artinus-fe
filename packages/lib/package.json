@@ -1,0 +1,25 @@
+{
+  "name": "@artinus/lib",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "프레임워크 비종속 공용 로직 — http 래퍼, queryClient 팩토리, cookie 유틸, 공통 타입",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./cookie": "./src/cookie.ts",
+    "./http": "./src/http.ts",
+    "./query": "./src/query.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.101.1",
+    "cookie": "^1.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

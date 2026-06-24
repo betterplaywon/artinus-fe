@@ -1,0 +1,14 @@
+/* 두 앱이 공유하는 최소 글로벌 보정 — Mantine 기본 스타일 위에 얹는다. */
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
