@@ -1,4 +1,0 @@
-{
-  "extends": "@artinus/config/tsconfig/base-lib.json",
-  "include": ["src"]
-}
