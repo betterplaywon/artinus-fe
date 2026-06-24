@@ -1,4 +1,4 @@
-import { postJson } from '@/lib';
+import { postJson } from '../../lib';
 
 export interface VerifyRequest {
   mobile: string;

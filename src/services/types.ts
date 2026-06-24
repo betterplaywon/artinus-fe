@@ -1,4 +1,4 @@
-import type { BrandColor } from '@/ui';
+import type { BrandColor } from '../ui';
 
 export type ServiceId = 'community' | 'news' | 'shopping';
 

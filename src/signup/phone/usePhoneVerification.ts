@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { HttpError } from '@/lib';
+import { HttpError } from '../../lib';
 import { verifyCode } from './verifyApi';
 
 // 설계 의도: 인증 상태 머신 (see docs/design-notes/0005-phone-verification-state-machine.md)

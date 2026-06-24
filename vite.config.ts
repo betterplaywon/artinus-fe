@@ -12,12 +12,12 @@ const root = dirname(fileURLToPath(import.meta.url));
  * - rollupOptions.input 에 서비스별 HTML 을 등록해 dist/community.html, dist/news.html,
  *   dist/shopping.html 이 각각 독립 번들로 생성된다.
  * - 새 서비스 추가 = HTML 1개 + 엔트리 1개 + 레지스트리 항목 1개. (핵심 로직은 공유)
- * - `@/` → src 경로 별칭. (see docs/design-notes/0002-multi-entry-independent-html.md)
+ * - import 는 상대경로 사용(에디터/TS 버전 무관 — 경로 별칭 비의존).
+ *   (see docs/design-notes/0002-multi-entry-independent-html.md)
  */
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: { '@': resolve(root, 'src') },
     dedupe: ['react', 'react-dom', '@mantine/core', '@mantine/hooks'],
   },
   build: {
