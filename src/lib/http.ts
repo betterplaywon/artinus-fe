@@ -1,11 +1,5 @@
-/**
- * 최소한의 타입 안전 fetch 래퍼.
- *
- * 설계 의도:
- * - 추가 의존성 없이 표준 `fetch`만으로 (1) JSON 파싱, (2) 비정상 응답의 에러화,
- *   (3) 타임아웃(AbortController) 세 공통 관심사를 캡슐화한다.
- * - 실패를 예외(throw)로 통일해 react-query 의 isError/오류 흐름과 자연스럽게 맞춘다.
- */
+// 최소 fetch 래퍼: JSON 파싱 + 비정상 응답 throw + 타임아웃. (기술 선택 근거는 README '비동기·오류 처리')
+// 실패를 예외로 통일해 react-query 의 isError/오류 흐름과 자연스럽게 맞춘다.
 export class HttpError<TBody = unknown> extends Error {
   readonly status: number;
   readonly body: TBody;
@@ -24,18 +18,10 @@ export interface HttpOptions extends RequestInit {
 }
 
 export async function httpJson<T>(url: string, options: HttpOptions = {}): Promise<T> {
-  const { timeoutMs = 10_000, headers, signal, ...rest } = options;
+  const { timeoutMs = 10_000, headers, ...rest } = options;
+  // 무한 대기를 막는 타임아웃. (AbortController 로 fetch 를 끊는다)
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
-
-  // 호출부 signal 과 타임아웃 signal 을 함께 존중한다.
-  // - 이미 abort 된 signal 은 'abort' 이벤트가 재발화하지 않으므로 즉시 반영한다.
-  // - 정상 종료 시 리스너가 (공유·장수 signal 에) 잔류하지 않도록 finally 에서 정리한다.
-  const onAbort = () => controller.abort();
-  if (signal) {
-    if (signal.aborted) controller.abort();
-    else signal.addEventListener('abort', onAbort, { once: true });
-  }
 
   try {
     const res = await fetch(url, {
@@ -48,7 +34,6 @@ export async function httpJson<T>(url: string, options: HttpOptions = {}): Promi
     return body as T;
   } finally {
     clearTimeout(timer);
-    signal?.removeEventListener('abort', onAbort);
   }
 }
 
