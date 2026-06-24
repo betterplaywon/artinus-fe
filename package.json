@@ -2,28 +2,49 @@
   "name": "artinus-fe",
   "private": true,
   "version": "0.1.0",
-  "description": "ARTINUS 프론트엔드 과제 — 상품(products) · 회원가입(signup) 모노레포",
+  "description": "ARTINUS 프론트엔드 과제 — 로그인 페이지",
   "type": "module",
   "packageManager": "pnpm@10.33.2",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "dev:products": "pnpm --filter @artinus/products dev",
-    "dev:signup": "pnpm --filter @artinus/signup dev",
-    "build": "pnpm -r --filter \"./apps/*\" build",
-    "build:products": "pnpm --filter @artinus/products build",
-    "build:signup": "pnpm --filter @artinus/signup build",
-    "typecheck": "pnpm -r typecheck",
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
+  "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@mantine/core": "^9.4.0",
+    "@mantine/hooks": "^9.4.0",
+    "@tanstack/react-query": "^5.101.1",
+    "cookie": "^1.1.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hook-form": "^7.80.0",
+    "zod": "^4.4.3"
+  },
   "devDependencies": {
-    "@artinus/config": "workspace:*",
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
     "eslint": "^10.5.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "msw": "^2.14.6",
+    "postcss": "^8.5.15",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.8.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.0",
+    "vite": "^8.1.0"
   }
 }

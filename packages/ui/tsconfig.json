@@ -1,7 +1,0 @@
-{
-  "extends": "@artinus/config/tsconfig/base-react.json",
-  "compilerOptions": {
-    "types": []
-  },
-  "include": ["src"]
-}

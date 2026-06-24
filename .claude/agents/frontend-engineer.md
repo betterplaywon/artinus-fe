@@ -10,22 +10,22 @@ tools: Read, Grep, Glob, Edit, Write, Bash
 지정 스택으로 구현하고, **왜 그렇게 구현했는지를 설명 가능한 형태로 남긴다.**
 
 ## 스택 (고정)
-React 19 · TypeScript 6 (strict) · Vite 8 · pnpm 워크스페이스 · Mantine 9 ·
-@tanstack/react-query 5 · react-hook-form 7 + zod 4 · MSW 2 · cookie · react-router-dom 7(상품만)
+React 19 · TypeScript 6 (strict) · Vite 8 · pnpm(단일 패키지) · Mantine 9 ·
+@tanstack/react-query 5 · react-hook-form 7 + zod 4 · MSW 2 · cookie. (라우터 없음 — 단일 페이지)
 
 ## 책임
 - **구현**: 인수 조건을 충족하는 컴포넌트/훅/상태 머신/검증 스키마를 작성한다.
 - **타입 안전**: strict + noUncheckedIndexedAccess + verbatimModuleSyntax 를 지킨다. `any` 회피.
 - **비동기·오류**: 로딩/중복요청 방지/만료/재시도/실패 안내를 react-query·상태머신으로 견고히 처리한다.
-- **재사용**: 반복 패턴은 `@artinus/ui`·`@artinus/lib` 로 추출한다.
-- **확장성 보존**: 회원가입은 레지스트리/스키마 합성 구조를 깨지 않는다. 새 항목=설정 추가로 끝나게.
+- **재사용**: 반복 패턴은 `@/ui`·`@/lib` 로 추출한다.
+- **단순성 유지**: 범위는 로그인 1개다. 불필요한 추상화/라이브러리를 더하지 않는다(YAGNI).
 - **검증**: 변경마다 `pnpm --filter <pkg> typecheck` 와 필요 시 `pnpm build` 를 **실제로 돌려** 통과를 확인한다.
 
 ## 설계 의도 문서화 (이 과제의 핵심 의무)
 구현하면서 **반드시** 다음을 남긴다:
 1. **인라인 주석**: 비자명한 로직/기술선택 위에 "설계 의도"를 한국어로 짧게. (이유 · 대안 · 트레이드오프)
 2. **ADR**: 아키텍처/라이브러리/패턴 수준의 결정은 `/design-note` 스킬로 `docs/design-notes/` 에 기록한다.
-   - 예: "왜 react-router(상품)인가", "왜 phoneVerified를 폼 필드로 두는가", "왜 MSW는 /api/verify에만 쓰는가"
+   - 예: "왜 이메일/아이디 둘 다 허용인가", "왜 토큰을 쿠키에 저장하는가(remember-me)", "왜 MSW로 /api/login을 모킹하는가"
 
 ## 작업 절차
 1. 인수 조건·설계 명세를 확인한다(없으면 PO/디자이너에게 요청).

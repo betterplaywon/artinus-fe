@@ -7,19 +7,83 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@hookform/resolvers':
+        specifier: ^5.4.0
+        version: 5.4.0(react-hook-form@7.80.0(react@19.2.7))
+      '@mantine/core':
+        specifier: ^9.4.0
+        version: 9.4.0(@mantine/hooks@9.4.0(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@mantine/hooks':
+        specifier: ^9.4.0
+        version: 9.4.0(react@19.2.7)
+      '@tanstack/react-query':
+        specifier: ^5.101.1
+        version: 5.101.1(react@19.2.7)
+      cookie:
+        specifier: ^1.1.1
+        version: 1.1.1
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.2.7
+        version: 19.2.7(react@19.2.7)
+      react-hook-form:
+        specifier: ^7.80.0
+        version: 7.80.0(react@19.2.7)
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
-      '@artinus/config':
-        specifier: workspace:*
-        version: link:packages/config
+      '@eslint/js':
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@10.5.0)
+      '@types/react':
+        specifier: ^19.2.17
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@19.2.17)
+      '@vitejs/plugin-react':
+        specifier: ^6.0.3
+        version: 6.0.3(vite@8.1.0(@types/node@26.0.0)(sugarss@5.0.1(postcss@8.5.15)))
       eslint:
         specifier: ^10.5.0
         version: 10.5.0
+      eslint-plugin-react-hooks:
+        specifier: ^7.1.1
+        version: 7.1.1(eslint@10.5.0)
+      eslint-plugin-react-refresh:
+        specifier: ^0.5.3
+        version: 0.5.3(eslint@10.5.0)
+      globals:
+        specifier: ^17.7.0
+        version: 17.7.0
+      msw:
+        specifier: ^2.14.6
+        version: 2.14.6(@types/node@26.0.0)(typescript@6.0.3)
+      postcss:
+        specifier: ^8.5.15
+        version: 8.5.15
+      postcss-preset-mantine:
+        specifier: ^1.18.0
+        version: 1.18.0(postcss@8.5.15)
+      postcss-simple-vars:
+        specifier: ^7.0.1
+        version: 7.0.1(postcss@8.5.15)
       prettier:
         specifier: ^3.8.4
         version: 3.8.4
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+      typescript-eslint:
+        specifier: ^8.62.0
+        version: 8.62.0(eslint@10.5.0)(typescript@6.0.3)
+      vite:
+        specifier: ^8.1.0
+        version: 8.1.0(@types/node@26.0.0)(sugarss@5.0.1(postcss@8.5.15))
 
   apps/products:
     dependencies:
