@@ -47,7 +47,7 @@ export function SignupForm({ service }: { service: ServiceConfig }) {
 
           {submitted ? (
             <Alert color="green" title="가입 정보 검증 완료">
-              모든 필수 입력·인증·약관이 유효합니다. (실제 가입 처리는 과제 범위 외)
+              모든 필수 입력·인증·약관이 유효합니다.
             </Alert>
           ) : null}
 
