@@ -8,13 +8,9 @@ import { FIELD_COMPONENTS } from './fieldRegistry';
 import { TermsAgreement } from './TermsAgreement';
 
 /**
- * 회원가입 폼 셸.
- *
- * 설계 의도:
- * - 서비스 설정(fields/terms)을 순회해 입력/약관을 렌더한다. 폼 자체는 서비스에 무지하다.
- * - 스키마는 설정에서 동적 합성하고 react-hook-form + zodResolver 로 검증한다.
- * - 제출 버튼은 formState.isValid 로만 게이팅 → "필수 입력 + 인증 + 필수 약관"이 한 값에 수렴.
- * - mode:'onChange' 로 입력 즉시 검증해 사용자에게 빠른 피드백을 준다.
+ * 회원가입 폼 셸 — 서비스 설정(fields/terms)을 순회해 입력·약관을 렌더한다. 폼 자체는 서비스에 무지하다.
+ * 스키마는 설정에서 동적 합성하고, 제출 버튼은 formState.isValid 한 값으로만 게이팅한다. (ADR 0004)
+ * mode:'onChange' 로 입력 즉시 검증해 빠른 피드백을 준다.
  */
 export function SignupForm({ service }: { service: ServiceConfig }) {
   const [submitted, setSubmitted] = useState(false);

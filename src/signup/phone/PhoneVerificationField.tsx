@@ -10,32 +10,13 @@ function formatTime(totalSeconds: number): string {
   return `${minutes}:${String(seconds).padStart(2, '0')}`;
 }
 
-/**
- * 입력+버튼 한 줄의 반응형 배치.
- *
- * 설계 의도(반응형):
- * - base(<768px, 폰·소형): 세로 스택 + 풀폭 → 좁은 폭에서 줄이 깨지지 않고, 버튼 터치 영역도 넓어진다.
- *   (글자 확대/≤320px 기기에서도 가로 넘침이 원천 차단됨)
- * - sm(768px) 이상: 가로 한 줄 + 버튼은 입력 하단에 정렬(라벨 높이만큼 입력이 더 큼).
- * - 전환점은 페이지 외형(배너/제목/패딩, SignupPage·ServiceBanner)과 동일하게 sm 한 곳으로 통일한다.
- *   → 768px 경계에서 레이아웃·타이포가 함께 '데스크톱 모드'로 바뀌어, 중간 폭(576~767px)에서
- *     "행은 펴졌는데 헤더는 모바일"인 어중간한 조합이 생기지 않는다.
- */
+// 입력+버튼 행: base 세로 스택(좁은 폭 줄깨짐·터치영역) / sm 가로. 전환점은 페이지와 sm 로 통일. (ADR 0007)
 const ROW_DIRECTION = { base: 'column', sm: 'row' } as const;
 const ROW_ALIGN = { base: 'stretch', sm: 'flex-end' } as const;
-// 입력은 가로 모드에서만 남는 공간을 채우게 한다(세로 스택에선 stretch 로 풀폭, 높이 자동).
-const INPUT_GROW = { sm: 1 } as const;
+const INPUT_GROW = { sm: 1 } as const; // 가로 모드에서만 남는 공간을 채운다
 
-/**
- * 인증 결과 피드백 메시지.
- *
- * 설계 의도(복잡도 정리):
- * - verified / expired / errorMessage 안내는 상태 머신상 **상호배타**다(동시에 참이 될 수 없음 —
- *   성공·만료 전이 시 errorMessage 를 null 로 비운다, see usePhoneVerification).
- *   → 흩어진 3개의 `cond ? <Text/> : null` 대신 "상태 → {색, 메시지}" 로 환원해 렌더를 한 번만 한다.
- * - 정적 안내(성공/만료)는 데이터(STATUS_FEEDBACK)로 모으고, 동적 안내(불일치·일시오류 = errorMessage)는
- *   status 와 1:1 이 아니므로(failed·sent 양쪽) 폴백으로 둔다.
- */
+// 인증 피드백. verified/expired/errorMessage 는 상태 머신상 상호배타라(성공·만료 시 errorMessage 정리)
+// 흩어진 삼항 대신 "상태 → {색, 메시지}" 단일 매핑으로 환원한다.
 type Feedback = { color: 'green' | 'red'; message: string };
 
 const STATUS_FEEDBACK: Partial<Record<VerificationStatus, Feedback>> = {
@@ -43,10 +24,7 @@ const STATUS_FEEDBACK: Partial<Record<VerificationStatus, Feedback>> = {
   expired: { color: 'red', message: '인증 시간이 만료되었습니다. ‘재전송’을 눌러 다시 시도해 주세요.' },
 };
 
-/**
- * 노출할 피드백 하나를 고른다: 정적 안내(성공/만료)가 있으면 그것을, 없으면 동적 errorMessage 를,
- * 둘 다 없으면 null. (상호배타라 우선순위는 안전망 — 위 설계 의도 참조)
- */
+// 정적 안내(성공/만료)가 있으면 그것을, 없으면 동적 errorMessage(불일치·일시오류)를, 둘 다 없으면 null.
 function selectFeedback(status: VerificationStatus, errorMessage: string | null): Feedback | null {
   const staticFeedback = STATUS_FEEDBACK[status];
   if (staticFeedback) return staticFeedback;
@@ -108,7 +86,7 @@ export function PhoneVerificationField() {
         <Button
           variant="light"
           onClick={handleStart}
-          // 검증 요청 진행 중엔 재전송 차단 — 진행 중 요청을 무효화하는 경합을 원천 차단(구 6-상태의 폐기 가드와 동등).
+          // 검증 요청 진행 중엔 재전송 차단 — 진행 중 요청을 무효화하는 경합을 막는다.
           disabled={isVerified || isVerifying || !phoneValid}
         >
           {status === 'idle' ? '인증번호 받기' : '재전송'}

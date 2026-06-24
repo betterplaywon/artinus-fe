@@ -5,12 +5,8 @@ import type { SignupFormValues } from './schema';
 import { TERM_DEFS } from './terms';
 
 /**
- * 약관 동의 — 전체 ↔ 개별 동기화.
- *
- * 설계 의도:
- * - 약관 동의값을 모두 폼 필드로 두고(setValue), 필수 약관은 스키마에서 true 를 강제한다.
- *   → "필수 약관 미동의 시 가입 불가"가 formState.isValid 로 자동 반영된다.
- * - 전체 동의 체크박스는 indeterminate 로 부분 선택 상태를 시각화한다.
+ * 약관 동의 — 전체 ↔ 개별 동기화. 동의값은 모두 폼 필드라(필수 약관은 스키마에서 true 강제)
+ * "필수 약관 미동의 시 가입 불가"가 formState.isValid 로 자동 반영된다. 전체 동의는 indeterminate 로 부분 선택을 표시.
  */
 export function TermsAgreement({ terms }: { terms: TermKey[] }) {
   const {
