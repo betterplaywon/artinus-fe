@@ -13,7 +13,7 @@ export function HubPage() {
       </Text>
       <Stack>
         {Object.values(SERVICES).map((service) => (
-          <Anchor key={service.id} href={`./${service.id}.html`} underline="never" c="inherit">
+          <Anchor key={service.kind} href={`./${service.kind}.html`} underline="never" c="inherit">
             <Card withBorder radius="md" padding="lg">
               <Group justify="space-between">
                 <div>

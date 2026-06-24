@@ -1,6 +1,10 @@
 import type { BrandColor } from '../ui';
 
-export type ServiceId = 'community' | 'news' | 'shopping';
+/**
+ * 서비스 종류. 값이 숫자 ID 가 아니라 "어떤 서비스인가"를 나타내는 식별 슬러그이므로,
+ * 숫자를 연상시키는 'Id' 대신 'Kind' 로 명명한다(HTML 파일명·레지스트리 키로도 그대로 쓰인다).
+ */
+export type ServiceKind = 'community' | 'news' | 'shopping';
 
 /** 입력 항목 키. 새 항목 추가 시 여기에 키를 더하고 스키마/컴포넌트 레지스트리에 등록한다. */
 export type FieldKey = 'id' | 'password' | 'passwordConfirm' | 'birthdate' | 'phone';
@@ -22,7 +26,7 @@ export interface ServiceBanner {
  *   → 새 서비스 = 이 객체 하나 + HTML/엔트리 추가. 컴포넌트/로직 수정은 0에 가깝다.
  */
 export interface ServiceConfig {
-  id: ServiceId;
+  kind: ServiceKind;
   name: string;
   brandColor: BrandColor;
   title: string;

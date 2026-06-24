@@ -45,11 +45,11 @@ export function SignupForm({ service }: { service: ServiceConfig }) {
 
           <TermsAgreement terms={service.terms} />
 
-          {submitted ? (
+          {submitted && (
             <Alert color="green" title="가입 정보 검증 완료">
               모든 필수 입력·인증·약관이 유효합니다.
             </Alert>
-          ) : null}
+          )}
 
           <Button type="submit" size="md" fullWidth disabled={!isValid}>
             가입하기

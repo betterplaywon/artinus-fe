@@ -11,5 +11,6 @@ ADR(Architecture Decision Record) 형식으로 남긴다. 작성은 `/design-not
 | [0004](0004-form-validity-as-submit-gate.md) | 제출 게이트를 formState.isValid 한 값에 수렴 | signup |
 | [0005](0005-phone-verification-state-machine.md) | 휴대폰 인증을 명시적 상태 머신으로 모델링 | signup |
 | [0006](0006-msw-scope-verify-only.md) | MSW 를 /api/verify 에만 적용 | signup |
+| [0007](0007-responsive-mantine-style-props.md) | 반응형은 Mantine mobile-first style-prop 으로 표현 | signup |
 
 > 신규 ADR 은 다음 4자리 번호로 추가하고 이 표에 한 줄 등록한다.

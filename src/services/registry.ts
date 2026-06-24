@@ -1,4 +1,4 @@
-import type { ServiceConfig, ServiceId } from './types';
+import type { ServiceConfig, ServiceKind } from './types';
 
 /**
  * 서비스 레지스트리 — 회원가입 변형의 단일 진실 공급원(Single Source of Truth).
@@ -7,9 +7,9 @@ import type { ServiceConfig, ServiceId } from './types';
  * - 입력 항목·순서, 약관 종류·필수여부, 테마 색이 서비스마다 다르다.
  * - 신규 서비스 추가/항목 변경/순서 변경/약관 추가가 이 객체 편집만으로 끝나도록 설계.
  */
-export const SERVICES: Record<ServiceId, ServiceConfig> = {
+export const SERVICES: Record<ServiceKind, ServiceConfig> = {
   community: {
-    id: 'community',
+    kind: 'community',
     name: '커뮤니티',
     brandColor: 'violet',
     title: '커뮤니티 시작하기',
@@ -19,7 +19,7 @@ export const SERVICES: Record<ServiceId, ServiceConfig> = {
     terms: ['tos', 'privacy'],
   },
   news: {
-    id: 'news',
+    kind: 'news',
     name: '뉴스 구독',
     brandColor: 'green',
     title: '뉴스 구독 신청',
@@ -29,7 +29,7 @@ export const SERVICES: Record<ServiceId, ServiceConfig> = {
     terms: ['tos', 'privacy', 'marketing'],
   },
   shopping: {
-    id: 'shopping',
+    kind: 'shopping',
     name: '쇼핑 멤버십',
     brandColor: 'orange',
     title: '쇼핑 멤버십 가입',
@@ -40,6 +40,6 @@ export const SERVICES: Record<ServiceId, ServiceConfig> = {
   },
 };
 
-export function getServiceConfig(id: ServiceId): ServiceConfig {
-  return SERVICES[id];
+export function getServiceConfig(kind: ServiceKind): ServiceConfig {
+  return SERVICES[kind];
 }
