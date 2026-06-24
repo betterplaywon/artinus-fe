@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Alert, Button, Stack } from '@mantine/core';
 import type { ServiceConfig } from '../services/types';
 import { buildSignupSchema, DEFAULT_VALUES, type SignupFormValues } from './schema';
-import { FIELD_COMPONENTS } from './fields';
+import { FIELD_COMPONENTS } from './fieldRegistry';
 import { TermsAgreement } from './TermsAgreement';
 
 /**

@@ -1,20 +1,17 @@
-import type { ComponentType } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { PasswordInput, TextInput } from '@mantine/core';
-import type { FieldKey } from '../services/types';
 import type { SignupFormValues } from './schema';
-import { PhoneVerificationField } from './phone/PhoneVerificationField';
 
 /**
- * 입력 항목 컴포넌트 레지스트리.
+ * 입력 항목 컴포넌트들.
  *
  * 설계 의도:
- * - 필드 키 → 컴포넌트 매핑으로, 폼은 서비스 설정의 fields 배열을 순회하며 렌더만 한다.
  * - 각 필드는 useFormContext 로 폼에 연결되어 등록/에러 표시를 자급한다.
- *   → 항목 추가/순서 변경이 레지스트리·설정 편집만으로 끝난다.
+ * - 필드 키 → 컴포넌트 매핑은 fieldRegistry.ts(FIELD_COMPONENTS)에서 구성한다.
+ *   (컴포넌트 파일은 컴포넌트만 export 하도록 분리 — react-refresh 호환)
  */
 
-function IdField() {
+export function IdField() {
   const {
     register,
     formState: { errors },
@@ -30,7 +27,7 @@ function IdField() {
   );
 }
 
-function PasswordField() {
+export function PasswordField() {
   const {
     register,
     formState: { errors },
@@ -46,7 +43,7 @@ function PasswordField() {
   );
 }
 
-function PasswordConfirmField() {
+export function PasswordConfirmField() {
   const {
     register,
     formState: { errors },
@@ -62,7 +59,7 @@ function PasswordConfirmField() {
   );
 }
 
-function BirthdateField() {
+export function BirthdateField() {
   const {
     register,
     formState: { errors },
@@ -79,11 +76,3 @@ function BirthdateField() {
     />
   );
 }
-
-export const FIELD_COMPONENTS: Record<FieldKey, ComponentType> = {
-  id: IdField,
-  password: PasswordField,
-  passwordConfirm: PasswordConfirmField,
-  birthdate: BirthdateField,
-  phone: PhoneVerificationField,
-};
