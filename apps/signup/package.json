@@ -1,0 +1,38 @@
+{
+  "name": "@artinus/signup",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "서비스별 회원가입 페이지 (멀티엔트리 · config 기반 · MSW)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@artinus/lib": "workspace:*",
+    "@artinus/ui": "workspace:*",
+    "@hookform/resolvers": "^5.4.0",
+    "@mantine/core": "^9.4.0",
+    "@mantine/hooks": "^9.4.0",
+    "@tanstack/react-query": "^5.101.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-hook-form": "^7.80.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@artinus/config": "workspace:*",
+    "@types/node": "^26.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "msw": "^2.14.6",
+    "postcss": "^8.5.15",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.0"
+  }
+}

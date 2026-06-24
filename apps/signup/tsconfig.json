@@ -1,0 +1,7 @@
+{
+  "extends": "@artinus/config/tsconfig/base-react.json",
+  "compilerOptions": {
+    "types": ["vite/client"]
+  },
+  "include": ["src"]
+}
