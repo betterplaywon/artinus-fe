@@ -5,7 +5,7 @@ import { QueryClient } from '@tanstack/react-query';
  *
  * 설계 의도:
  * - 캐싱/재시도 기본값을 한 곳에서 정의한다.
- * - 로그인은 사용자 의도로만 재시도해야 하므로 mutation 단에서 retry:false 를 별도 지정한다.
+ * - 휴대폰 인증 검증은 사용자 의도로만 재시도해야 하므로 mutation 단에서 retry:false 를 별도 지정한다.
  */
 export function createQueryClient(): QueryClient {
   return new QueryClient({
