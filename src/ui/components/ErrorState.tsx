@@ -23,11 +23,11 @@ export function ErrorState({
         <Text c="dimmed" size="sm" ta="center">
           {message}
         </Text>
-        {onRetry ? (
+        {onRetry && (
           <Button variant="light" onClick={onRetry}>
             다시 시도
           </Button>
-        ) : null}
+        )}
       </Stack>
     </CenteredMessage>
   );

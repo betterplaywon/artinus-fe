@@ -4,12 +4,11 @@ import { parse, serialize, type SerializeOptions } from 'cookie';
  * 타입 안전한 쿠키 헬퍼.
  *
  * 설계 의도:
- * - 로그인 성공 시 발급된 토큰을 저장하고, '로그인 상태 유지(remember me)' 여부에 따라
- *   수명을 조절하는 데 사용한다. (see docs/design-notes/0003-msw-and-cookie-session.md)
- * - localStorage 대신 쿠키를 택한 이유: maxAge 만료 시맨틱이 내장되어 "지속/세션" 구분이 자연스럽고,
- *   추후 서버 전달이 필요해지면 동일 API로 확장 가능하다.
- *   (트레이드오프: 4KB 용량 제한, 매 요청 전송 → 큰 데이터엔 부적합)
- * - `cookie` 패키지의 직렬화를 써서 인코딩/옵션 처리를 직접 구현하지 않는다.
+ * - 지정 스택에 포함된 `cookie` 를 한 곳에서 타입 안전하게 감싼 공용 유틸. 직렬화/옵션 처리를
+ *   직접 구현하지 않고 `cookie` 패키지에 위임한다.
+ * - **현재 회원가입 플로우에는 직접 배선돼 있지 않다(미사용).** 의도한 용도는 "수명 있는 가벼운
+ *   클라이언트 상태"(예: 입력 임시저장, 최근 선택 서비스)이며, 해당 기능 구현 시 사용한다.
+ * - localStorage 대비 쿠키 이점: maxAge 만료 시맨틱 내장. 트레이드오프: 4KB 제한, 매 요청 전송.
  */
 export function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined;

@@ -2,7 +2,7 @@
   "name": "artinus-fe",
   "private": true,
   "version": "0.1.0",
-  "description": "ARTINUS 프론트엔드 과제 — 로그인 페이지",
+  "description": "ARTINUS 프론트엔드 과제 — 서비스별 회원가입 페이지(멀티엔트리)",
   "type": "module",
   "packageManager": "pnpm@10.33.2",
   "engines": {

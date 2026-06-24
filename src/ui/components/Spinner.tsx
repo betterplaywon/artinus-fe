@@ -16,11 +16,11 @@ export function Spinner({ label, minHeight = 200 }: SpinnerProps) {
     <CenteredMessage minHeight={minHeight}>
       <Stack align="center" gap="xs" role="status" aria-live="polite">
         <Loader />
-        {label ? (
+        {label && (
           <Text c="dimmed" size="sm">
             {label}
           </Text>
-        ) : null}
+        )}
       </Stack>
     </CenteredMessage>
   );
