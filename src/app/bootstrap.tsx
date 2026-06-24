@@ -11,13 +11,10 @@ import { getServiceConfig } from '../services/registry';
 import { SignupPage } from '../signup/SignupPage';
 
 /**
- * 모든 서비스 엔트리가 공유하는 부트스트랩.
- *
- * 설계 의도:
- * - 엔트리(community/news/shopping)는 serviceKind 만 다르고 마운트 로직은 100% 공유한다.
- * - MSW 워커를 먼저 기동(await)한 뒤 렌더해, 첫 인증 요청부터 모킹이 보장되도록 한다.
+ * 모든 서비스 엔트리가 공유하는 부트스트랩 (엔트리는 serviceKind 만 다르다 — ADR 0002).
  */
 export async function bootstrap(serviceKind: ServiceKind): Promise<void> {
+  // MSW 워커를 먼저 기동(await)한 뒤 렌더해, 첫 /api/verify 요청부터 모킹을 보장한다. (ADR 0006)
   const { worker } = await import('../mocks/browser');
   await worker.start({ onUnhandledRequest: 'bypass', quiet: true });
 

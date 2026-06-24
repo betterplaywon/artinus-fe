@@ -2,17 +2,12 @@ import { z } from 'zod';
 import type { FieldKey, ServiceConfig } from '../services/types';
 import { TERM_DEFS } from './terms';
 
-// 설계 의도: 설정 기반 동적 스키마 합성 + 제출 게이트
-// (see docs/design-notes/0003-signup-config-driven-architecture.md, 0004-form-validity-as-submit-gate.md)
+// 설정 기반 동적 스키마 합성 + 제출 게이트. 설계 근거는 README '확장성 설계'/'제출 게이트'
+// 및 ADR 0003(config-driven), 0004(formState.isValid 게이트) 참조.
 
 /**
- * 폼 값 타입 — 모든 서비스의 가능한 필드를 합집합으로 가진다.
- * 특정 서비스는 그중 일부만 렌더링/검증하지만, 타입과 기본값은 전체를 유지해
- * 입력 컴포넌트를 항상 controlled 로 둔다.
- *
- * 핵심 설계: `phoneVerified`, 약관(`tos`/`privacy`/...)을 모두 폼 필드로 둔다.
- * → "가입하기 활성화 = 필수 입력 유효 + 휴대폰 인증 + 필수 약관 동의" 가
- *    react-hook-form 의 `formState.isValid` 한 값으로 환원된다.
+ * 폼 값 타입 — 모든 서비스 필드의 합집합. (서비스는 일부만 렌더하지만 타입·기본값은 전체를 유지해
+ * 입력을 항상 controlled 로 둔다.) phoneVerified·약관도 폼 필드로 둬서 제출 게이트를 isValid 한 값에 수렴시킨다.
  */
 export interface SignupFormValues {
   id: string;
@@ -90,11 +85,8 @@ const FIELD_SCHEMAS: Record<FieldKey, Record<string, z.ZodTypeAny>> = {
   },
 };
 
-/**
- * 서비스 설정으로부터 zod 스키마를 동적으로 합성한다.
- * - 입력 필드 조각 + 약관(필수=true 강제, 선택=boolean)을 모아 z.object 구성
- * - 비밀번호 확인 필드가 있으면 교차 검증(refine)으로 일치 여부 확인
- */
+// 서비스 설정 → zod 스키마 동적 합성: 필드 조각 + 약관(필수=true 강제) 을 모으고,
+// 비밀번호 확인 필드가 있으면 교차 검증(refine)을 더한다.
 export function buildSignupSchema(service: ServiceConfig): z.ZodType<SignupFormValues, SignupFormValues> {
   const shape: Record<string, z.ZodTypeAny> = {};
 

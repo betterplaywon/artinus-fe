@@ -11,14 +11,14 @@
 ## 결정
 "서비스마다 다른 것"을 전부 **데이터(`ServiceConfig`)로 환원**하고, 폼은 그 설정을 순회해 렌더한다.
 - `src/services/registry.ts` — 서비스별 제목/배너/테마/`fields[]`/`terms[]` 선언
-- `src/signup/fields.tsx` — `FieldKey → 컴포넌트` 레지스트리
+- `src/signup/fieldRegistry.ts` — `FieldKey → 컴포넌트` 레지스트리 (컴포넌트 본체는 `fields.tsx`·`phone/`)
 - `src/signup/terms.ts` — `TermKey → 정의` 레지스트리
 - `src/signup/schema.ts` — 설정으로부터 zod 스키마를 **동적 합성**
 
 확장 지점(정확히):
 - **새 서비스** = `registry.ts` 1항목 + HTML/엔트리/`vite.config` input.
-- **새 입력 항목** = `types.ts`(FieldKey) + `schema.ts`(FIELD_SCHEMAS) + `fields.tsx`(FIELD_COMPONENTS) **3곳**.
-- **새 약관** = `types.ts`(TermKey) + `terms.ts`(TERM_DEFS) **2곳**. (절차: `/add-signup-service`)
+- **새 입력 항목** = `types.ts`(FieldKey) + `schema.ts`(FIELD_SCHEMAS) + `fieldRegistry.ts`(FIELD_COMPONENTS) + `schema.ts`(SignupFormValues·DEFAULT_VALUES) **5곳**. 뒤 2곳(폼 값 타입·기본값)은 손 동기화지만 누락 시 컴파일 에러/controlled 경고로 즉시 드러난다.
+- **새 약관** = `types.ts`(TermKey) + `terms.ts`(TERM_DEFS) + `schema.ts`(SignupFormValues·DEFAULT_VALUES) **4곳**. (절차: `/add-signup-service`)
 
 ## 고려한 대안
 - **서비스별 폼 하드코딩** — 직관적이나 중복·드리프트, 확장 시 수정 범위가 넓음.

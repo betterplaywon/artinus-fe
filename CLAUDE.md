@@ -23,15 +23,15 @@ src/
   entries/      community·news·shopping·index (serviceId 만 다름)
   app/          bootstrap.tsx (공유 마운트 + MSW 기동)
   services/     registry·types (서비스 선언 = 단일 진실 공급원)
-  signup/       schema(동적 zod 합성)·fields·terms·SignupForm·SignupPage·ServiceBanner·TermsAgreement·phone/(인증 상태머신)
+  signup/       schema(동적 zod 합성)·fields·fieldRegistry·terms·SignupForm·SignupPage·ServiceBanner·TermsAgreement·phone/(인증 상태머신)
   mocks/        MSW /api/verify
-  lib/          http·cookie·query     ui/  theme·Spinner·ErrorState
+  lib/          http·query     ui/  theme
 ```
 `@/` → `src` 경로 별칭(tsconfig paths + vite alias).
 
 ## 2. 스택 (고정 — 임의 추가 금지)
 React 19 · TypeScript 6(strict) · Vite 8 · pnpm · Mantine 9 · @tanstack/react-query 5 ·
-react-hook-form 7 + zod 4 · MSW 2 · cookie. **라우터 없음**(서비스 구분은 멀티엔트리 HTML).
+react-hook-form 7 + zod 4 · MSW 2. **라우터 없음**(서비스 구분은 멀티엔트리 HTML).
 
 ## 3. 명령어
 ```bash
@@ -57,8 +57,8 @@ pnpm lint
 ## 6. 회원가입 확장성 규칙 (핵심 평가 항목)
 "새 서비스/항목/약관 추가 = 설정 편집"이 되도록 설계되어 있다(`/add-signup-service`).
 - 서비스 = `src/services/registry.ts` 1항목 + HTML/엔트리/`vite.config` input.
-- 입력 항목 = `types.ts`(FieldKey) + `schema.ts`(FIELD_SCHEMAS) + `fields.tsx`(FIELD_COMPONENTS) **3곳**.
-- 약관 = `types.ts`(TermKey) + `terms.ts`(TERM_DEFS) **2곳**.
+- 입력 항목 = `types.ts`(FieldKey) + `schema.ts`(FIELD_SCHEMAS) + `fieldRegistry.ts`(FIELD_COMPONENTS) + `schema.ts`(SignupFormValues·DEFAULT_VALUES) **5곳**. (뒤 2곳은 타입/기본값 — 빠뜨리면 컴파일·controlled 경고로 드러난다)
+- 약관 = `types.ts`(TermKey) + `terms.ts`(TERM_DEFS) + `schema.ts`(SignupFormValues·DEFAULT_VALUES) **4곳**.
 - **제출 게이트**: `phoneVerified`·약관 동의를 모두 폼 필드로 두어 "필수입력+인증+필수약관"이 `formState.isValid` 한 값에 수렴([ADR 0004]).
 
 ## 7. 에이전트 협업 모델

@@ -1,12 +1,7 @@
 import type { ServiceConfig, ServiceKind } from './types';
 
-/**
- * 서비스 레지스트리 — 회원가입 변형의 단일 진실 공급원(Single Source of Truth).
- *
- * README 표를 그대로 구조화했다:
- * - 입력 항목·순서, 약관 종류·필수여부, 테마 색이 서비스마다 다르다.
- * - 신규 서비스 추가/항목 변경/순서 변경/약관 추가가 이 객체 편집만으로 끝나도록 설계.
- */
+// 서비스 레지스트리 — 회원가입 변형의 단일 진실 공급원. 서비스마다 다른 것(제목·배너·입력 항목·
+// 순서·약관·테마)을 전부 데이터로 선언한다. 확장 절차는 README '확장성 설계' / ADR 0003 참조.
 export const SERVICES: Record<ServiceKind, ServiceConfig> = {
   community: {
     kind: 'community',

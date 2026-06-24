@@ -2,14 +2,8 @@ import { useFormContext } from 'react-hook-form';
 import { PasswordInput, TextInput } from '@mantine/core';
 import type { SignupFormValues } from './schema';
 
-/**
- * 입력 항목 컴포넌트들.
- *
- * 설계 의도:
- * - 각 필드는 useFormContext 로 폼에 연결되어 등록/에러 표시를 자급한다.
- * - 필드 키 → 컴포넌트 매핑은 fieldRegistry.ts(FIELD_COMPONENTS)에서 구성한다.
- *   (컴포넌트 파일은 컴포넌트만 export 하도록 분리 — react-refresh 호환)
- */
+// 입력 항목 컴포넌트들. 각 필드는 useFormContext 로 폼에 연결돼 등록·에러 표시를 자급한다.
+// (키→컴포넌트 매핑은 fieldRegistry.ts. 이 파일은 컴포넌트만 export — react-refresh 호환)
 
 export function IdField() {
   const {

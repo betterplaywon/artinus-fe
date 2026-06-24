@@ -13,7 +13,8 @@
 **라이브러리/파생으로 환원 가능한 것은 상태로 두지 않는다** — 도메인 고유 복잡도만 상태로 남긴다:
 - "검증 진행 중" → 별도 `verifying` 상태 대신 react-query **`useMutation.isPending`**(`isVerifying`)에서 파생. 로딩 표시는 라이브러리가 관리.
 - "코드 불일치/일시오류" → 별도 `failed` 상태 대신 **`sent` 유지 + `errorMessage`** 안내(재시도 가능). → 컴포넌트의 `showCodeInput`도 3중 OR → 단일 비교(`status==='sent'`).
-- 만료 판단은 **클라이언트 타이머**로만 (서버 발송 API 없음 — README).
+- 만료 판단은 **클라이언트 타이머**로만 (서버 발송 API 없음 — README). 타이머는 만료 **절대시각** 기준으로 매 틱 남은 초를 파생한다 — `setState` 업데이터를 순수하게 유지(부수효과는 업데이터 밖에서 한 번만)하고, 백그라운드 탭 throttling 에도 정확하다.
+- **렌더 피드백 환원**: `verified`/`expired`/`errorMessage` 안내는 상호배타(성공·만료 전이 시 `errorMessage` 정리)라, 흩어진 삼항 대신 `상태 → {색, 메시지}` 단일 매핑(`STATUS_FEEDBACK`)으로 한 번만 렌더한다.
 - 검증 호출은 react-query `useMutation(retry:false)` — **자동 재시도 금지**(사용자 의도로만 재시도).
 - 중복요청 방지: 같은 틱 보호는 동기 `pendingRef`(isPending 은 다음 렌더 반영이라 부족), 상태 가드는 `sent` 가 아니면 무시.
 - **경합 차단(도메인 고유 — 라이브러리로 못 없앤다)**: 검증 응답은 0.5~1.5초 지연되므로 그 사이 타이머가 만료될 수 있다. 응답 콜백은
